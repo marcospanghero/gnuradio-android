@@ -1,11 +1,11 @@
-FROM ubuntu:19.10
+FROM ubuntu:18.04
 
 MAINTAINER Bastian Bloessl mail@bastibl.net
 
 ARG USER=android
 
-RUN sed -i 's/archive.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
-RUN sed -i 's/security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+#RUN sed -i 's/archive.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+#RUN sed -i 's/security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
@@ -27,7 +27,7 @@ USER $USER
 RUN mkdir -p /home/$USER/src
 WORKDIR /home/$USER/src
 
-RUN git clone --recursive https://github.com/bastibl/gnuradio-android.git
+RUN git clone --recursive https://github.com/marcospanghero/gnuradio-android.git
 
 WORKDIR /home/$USER/src/gnuradio-android/thrift
 RUN git clean -xdf
@@ -61,8 +61,8 @@ RUN ./build.sh
 RUN ./build_aarch64.sh
 
 WORKDIR /home/$USER/src
-RUN git clone https://github.com/bastibl/android-benchmark.git
-RUN git clone https://github.com/bastibl/android-volk.git
+#RUN git clone https://github.com/bastibl/android-benchmark.git
+#RUN git clone https://github.com/bastibl/android-volk.git
 RUN git clone https://github.com/bastibl/android-fm.git
 #RUN git clone https://github.com/bastibl/android-hw.git
 #RUN git clone https://github.com/bastibl/android-wlan.git
